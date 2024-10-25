@@ -1,87 +1,171 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { Globe, Heart, Code, Users } from 'lucide-react';
 
+// Custom backdrop blur component
+const BlurredBackdrop = ({ className = "" }) => (
+  <div className={`absolute inset-0 backdrop-blur-3xl bg-black/10 ${className}`} />
+);
+
 const Home = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e) => {
+    setMousePosition({ x: e.clientX, y: e.clientY });
+  };
+
   const features = [
     {
       icon: <Code className="w-6 h-6" />,
-      title: "Open Source Solutions",
-      description: "Contribute to meaningful projects that make a real difference in the nonprofit sector."
+      title: "Developer First",
+      description: "Build groundbreaking solutions with cutting-edge tech stack"
     },
     {
       icon: <Heart className="w-6 h-6" />,
-      title: "Support Nonprofits",
-      description: "Help organizations focus on their mission by providing them with modern tech solutions."
+      title: "Impact Driven",
+      description: "Create meaningful change through innovative technology"
     },
     {
       icon: <Globe className="w-6 h-6" />,
-      title: "Global Impact",
-      description: "Join a worldwide community of developers creating positive change through code."
+      title: "Global Network",
+      description: "Connect with forward-thinking developers worldwide"
     },
     {
       icon: <Users className="w-6 h-6" />,
-      title: "Community Driven",
-      description: "Collaborate with passionate developers and nonprofit leaders from around the world."
+      title: "Community Led",
+      description: "Shape the future of nonprofit tech solutions"
     }
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-black text-white" onMouseMove={handleMouseMove}>
       {/* Hero Section */}
-      <div className="relative overflow-hidden bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:pb-28 xl:pb-32">
-            <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
-              <div className="text-center">
-                <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-                  <span className="block">Connect, Code, and</span>
-                  <span className="block text-blue-600">Make a Difference</span>
-                </h1>
-                <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl">
-                  Vinculo brings together passionate developers and nonprofits to create
-                  open-source solutions that drive positive change in communities worldwide.
-                </p>
-                <div className="mt-5 sm:mt-8 sm:flex sm:justify-center">
-                  <div className="rounded-md shadow">
-                    <a href="/projects" className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10">
-                      Explore Projects
-                    </a>
-                  </div>
-                  <div className="mt-3 sm:mt-0 sm:ml-3">
-                    <a href="/contribute" className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-blue-100 hover:bg-blue-200 md:py-4 md:text-lg md:px-10">
-                      Start Contributing
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </main>
-          </div>
+      <div className="relative min-h-screen overflow-hidden">
+        {/* Animated gradient background */}
+        <motion.div 
+          className="absolute inset-0 opacity-30"
+          animate={{
+            background: [
+              'radial-gradient(circle at 50% 50%, #FF0080 0%, transparent 50%)',
+              'radial-gradient(circle at 60% 40%, #7928CA 0%, transparent 50%)',
+              'radial-gradient(circle at 40% 60%, #FF0080 0%, transparent 50%)'
+            ],
+            transition: { duration: 10, repeat: Infinity, repeatType: "reverse" }
+          }}
+        />
+        
+        {/* Content */}
+        <div className="relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-7xl mx-auto pt-32 px-4 sm:px-6 lg:px-8"
+          >
+            <div className="text-center">
+              <motion.div 
+                className="inline-block"
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <span className="px-4 py-1 text-sm font-mono bg-white/10 rounded-full backdrop-blur-sm">
+                  Open Source × Nonprofit Technology
+                </span>
+              </motion.div>
+
+              <motion.h1 
+                className="mt-8 text-6xl md:text-8xl font-bold tracking-tighter"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+              >
+                Build
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF0080] to-[#7928CA]"> the future </span>
+                of impact
+              </motion.h1>
+              
+              <motion.p 
+                className="mt-6 text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto font-light"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3 }}
+              >
+                Join a network of developers creating next-generation
+                open-source solutions for nonprofits.
+              </motion.p>
+
+              <motion.div 
+                className="mt-12 flex flex-col sm:flex-row justify-center gap-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+              >
+                <motion.a
+                  href="/projects"
+                  className="group relative px-8 py-4 text-lg backdrop-blur-sm bg-white/10 rounded-full hover:bg-white/20 transition-all duration-300"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="relative z-10">View Projects</span>
+                  <motion.div
+                    className="absolute inset-0 rounded-full bg-gradient-to-r from-[#FF0080] to-[#7928CA] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    style={{ filter: 'blur(12px)' }}
+                  />
+                </motion.a>
+                <motion.a
+                  href="/contribute"
+                  className="px-8 py-4 text-lg border border-white/20 rounded-full hover:bg-white/5 transition-all duration-300"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Start Contributing
+                </motion.a>
+              </motion.div>
+            </div>
+          </motion.div>
         </div>
       </div>
 
       {/* Features Section */}
-      <div className="py-12 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="lg:text-center">
-            <h2 className="text-base text-blue-600 font-semibold tracking-wide uppercase">Features</h2>
-            <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-              Why Join Vinculo?
+      <div className="py-32 relative">
+        <BlurredBackdrop />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div 
+            className="text-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl font-bold tracking-tight">
+              Why Join Vinculo
+            </h2>
+            <p className="mt-4 text-xl text-gray-400">
+              Be part of the next wave of nonprofit innovation
             </p>
-            <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-              Join our community and help create technology solutions that matter.
-            </p>
-          </div>
+          </motion.div>
 
-          <div className="mt-10">
-            <div className="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
+          <div className="mt-20">
+            <div className="grid grid-cols-1 gap-12 sm:grid-cols-2">
               {features.map((feature, index) => (
-                <div key={index} className="relative">
-                  <div className="absolute flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
+                <motion.div
+                  key={index}
+                  className="relative p-8 rounded-2xl border border-white/10 backdrop-blur-sm hover:border-white/20 transition-all duration-300"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ y: -5 }}
+                >
+                  <div className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-[#FF0080] to-[#7928CA]">
                     {feature.icon}
                   </div>
-                  <p className="ml-16 text-lg leading-6 font-medium text-gray-900">{feature.title}</p>
-                  <p className="mt-2 ml-16 text-base text-gray-500">{feature.description}</p>
-                </div>
+                  <h3 className="mt-6 text-xl font-semibold">
+                    {feature.title}
+                  </h3>
+                  <p className="mt-4 text-gray-400">
+                    {feature.description}
+                  </p>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -89,20 +173,34 @@ const Home = () => {
       </div>
 
       {/* CTA Section */}
-      <div className="bg-blue-600">
-        <div className="max-w-2xl mx-auto text-center py-16 px-4 sm:py-20 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
-            <span className="block">Ready to make an impact?</span>
-            <span className="block">Join our community today.</span>
-          </h2>
-          <p className="mt-4 text-lg leading-6 text-blue-100">
-            Start contributing to projects that make a difference or list your nonprofit's needs.
+      <motion.div 
+        className="relative py-32"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+      >
+        <BlurredBackdrop className="bg-gradient-to-r from-[#FF0080]/20 to-[#7928CA]/20" />
+        <div className="relative z-10 max-w-7xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+          <motion.h2 
+            className="text-4xl font-bold tracking-tight"
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 3, repeat: Infinity }}
+          >
+            Ready to make an impact?
+          </motion.h2>
+          <p className="mt-6 text-xl text-gray-400 max-w-2xl mx-auto">
+            Join our community of innovators today.
           </p>
-          <a href="/signup" className="mt-8 w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-blue-50 sm:w-auto">
+          <motion.a
+            href="/signup"
+            className="mt-8 inline-block px-8 py-4 text-lg bg-white text-black rounded-full hover:bg-gray-100 transition-all duration-300"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
             Get Started
-          </a>
+          </motion.a>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };
