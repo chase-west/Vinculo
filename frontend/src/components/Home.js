@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Globe, Heart, Code, Users } from 'lucide-react';
 
@@ -18,22 +18,22 @@ const Home = () => {
     {
       icon: <Code className="w-6 h-6" />,
       title: "Developer First",
-      description: "Build groundbreaking solutions with cutting-edge tech stack"
+      description: "Build groundbreaking solutions with a cutting-edge tech stack."
     },
     {
       icon: <Heart className="w-6 h-6" />,
       title: "Impact Driven",
-      description: "Create meaningful change through innovative technology"
+      description: "Create meaningful change through innovative technology."
     },
     {
       icon: <Globe className="w-6 h-6" />,
       title: "Global Network",
-      description: "Connect with forward-thinking developers worldwide"
+      description: "Connect with forward-thinking developers worldwide."
     },
     {
       icon: <Users className="w-6 h-6" />,
       title: "Community Led",
-      description: "Shape the future of nonprofit tech solutions"
+      description: "Shape the future of nonprofit tech solutions."
     }
   ];
 
@@ -41,7 +41,6 @@ const Home = () => {
     <div className="min-h-screen bg-black text-white" onMouseMove={handleMouseMove}>
       {/* Hero Section */}
       <div className="relative min-h-screen overflow-hidden">
-        {/* Animated gradient background */}
         <motion.div 
           className="absolute inset-0 opacity-30"
           animate={{
@@ -53,7 +52,12 @@ const Home = () => {
             transition: { duration: 10, repeat: Infinity, repeatType: "reverse" }
           }}
         />
-        
+
+        {/* Vinculo Logo */}
+        <div className="absolute top-8 left-8 text-3xl font-bold text-white bg-gradient-to-r from-[#FF0080] to-[#7928CA] bg-clip-text text-transparent">
+          Vinculo
+        </div>
+
         {/* Content */}
         <div className="relative z-10">
           <motion.div
@@ -90,8 +94,7 @@ const Home = () => {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3 }}
               >
-                Join a network of developers creating next-generation
-                open-source solutions for nonprofits.
+                Join a network of developers creating next-generation open-source solutions for nonprofits.
               </motion.p>
 
               <motion.div 
@@ -140,7 +143,7 @@ const Home = () => {
               Why Join Vinculo
             </h2>
             <p className="mt-4 text-xl text-gray-400">
-              Be part of the next wave of nonprofit innovation
+              Be part of the next wave of nonprofit innovation.
             </p>
           </motion.div>
 
