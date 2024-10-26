@@ -53,7 +53,6 @@ const Home = () => {
           }}
         />
 
-        {/* Vinculo Logo */}
         <div className="absolute top-8 left-8 text-3xl font-bold text-white bg-gradient-to-r from-[#FF0080] to-[#7928CA] bg-clip-text text-transparent">
           Vinculo
         </div>
