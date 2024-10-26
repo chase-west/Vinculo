@@ -11,6 +11,9 @@ const ProjectList = () => {
   return (
     <div className="container mx-auto p-4">
       <div className="flex justify-between items-center mb-6">
+      <a href="/" className="absolute top-8 left-8 text-3xl font-bold text-black">
+        Vinculo
+      </a>
         <h1 className="text-3xl font-bold">Open Source Projects</h1>
         <button className="px-4 py-2 border rounded hover:bg-gray-100">
           Submit Project
